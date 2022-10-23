@@ -22,15 +22,16 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    // new Timer(const Duration(milliseconds: 1000), () {
-    //   showMessage(context);
-    // });
+    new Timer(const Duration(milliseconds: 1000), () {
+      //バナーダイアログ
+      showMessage(context);
+    });
   }
 
   showMessage(context) {
     customAlert(
         context,
-        'https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+        'https://makeshop-multi-images.akamaized.net/kokodake01/shopimages/27/10/12_000000001027.jpg?1648181641',
         'SHOP NOW',
         'Enjoy 20% discount on all products in our shop, for your first order');
   }
@@ -56,8 +57,8 @@ class _HomePageState extends State<HomePage> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: NetworkImage(
-                      //TODO: constに移動
-                        'https://makeshop-multi-images.akamaized.net/kokodake01/shopimages/37/10/4_000000001037.jpg?1653880461'),
+                      //TODO: Home header image constに移動
+                        'https://makeshop-multi-images.akamaized.net/kokodake01/shopimages/20/10/34_000000001020.jpg?1648175117'),
                     fit: BoxFit.cover,
                   ),
                 ),
