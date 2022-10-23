@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "899202697652",
+    "project_id": "rezard-demo",
+    "storage_bucket": "rezard-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899202697652:android:941b0006ccbe2b01a78ae1",
+        "android_client_info": {
+          "package_name": "com.example.shop_ui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "899202697652-id5djj2592iilcqb9hm6vhtvagg4cj0n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk-Ww8G-dKmX0m0I0Vj9ZxccXqNDqZdMM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "899202697652-id5djj2592iilcqb9hm6vhtvagg4cj0n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
