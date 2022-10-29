@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   AppTheme._();
+  ///ダークモードかどうか
+  ///true:dark, false:light
+  bool isDarkMode(BuildContext context) {
+    final Brightness brightness = MediaQuery.platformBrightnessOf(context);
+    return brightness == Brightness.dark;
+  }
+
 
   static final ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: bgColors[0],

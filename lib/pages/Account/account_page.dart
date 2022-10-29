@@ -19,13 +19,13 @@ class _AccountPageState extends State<AccountPage> {
 
   Widget getBody(appState) {
     List listTiles = [
-      "Account Details",
-      "Loyalty card & offers",
-      "Notifications",
-      "Delivery Information",
-      "Payment Information",
-      "Language",
-      "Privacy Settings"
+      "アカウント詳細",
+      "ご利用ガイド",
+      "通知設定",
+      "メール通知設定",
+      "お支払い設定",
+      "プライバシーポリシー",
+      "個人情報保護ポリシー"
     ];
     return ListView(
       children: <Widget>[
@@ -71,7 +71,7 @@ class _AccountPageState extends State<AccountPage> {
                           borderRadius: BorderRadius.circular(5)),
                       onPressed: () {},
                       child: Text(
-                        "EDIT ACCOUNT",
+                        "アカウント編集",
                         style: TextStyle(color: white, fontSize: 13),
                       ))
                 ],
@@ -187,7 +187,7 @@ class _AccountPageState extends State<AccountPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "Dark Mode",
+                    "ダークモード",
                     style: TextStyle(fontSize: 16),
                   ),
                   Switch(
@@ -206,10 +206,61 @@ class _AccountPageState extends State<AccountPage> {
               Divider(
                 color: grey.withOpacity(0.8),
               ),
+              SizedBox(
+                height: 30,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 40, right: 40),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      width: 130,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).buttonColor,
+                          borderRadius: BorderRadius.circular(30)),
+                      child: Center(
+                        child: Text(
+                          "設定",
+                          style: TextStyle(color: white, fontSize: 15),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      child: Container(
+                        width: 130,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 2,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "サインアウト",
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor, fontSize: 15),
+                          ),
+                        ),
+                      ),
+                      onTap: () {
+                        goToSignOut();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
             ],
           ),
         )
       ],
     );
+  }
+  goToSignOut() {
+    Navigator.pushNamed(context, '/welcome');
   }
 }

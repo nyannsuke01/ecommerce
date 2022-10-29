@@ -6,6 +6,8 @@ import 'package:shop_ui/pages/home_page.dart';
 import 'package:shop_ui/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../theme/app_theme.dart';
+import 'SNS/sns_page.dart';
 
 class RootTabPage extends StatefulWidget {
   int activePage = 0;
@@ -21,17 +23,15 @@ class _TabbarState extends State<RootTabPage> {
   // int _currentIndex = 0;
 
   int _pageIndex = 0;
-
   String _page = 'Shop UI';
-
   AppBar _appbar = null;
 
   var children2 = <Widget>[
     HomePage(),
     SearchShopPage(),
-    AccountPage(),
+    SnsPage(),
     CartPage(),
-    MorePage()
+    AccountPage(),
   ];
 
   @override
@@ -49,7 +49,8 @@ class _TabbarState extends State<RootTabPage> {
   @override
   Widget build(BuildContext context) {
     // var _l10n = PackedLocalizations.of(context);
-
+    var unSelectedIconColor  = context.isDarkMode ?
+    Color.fromRGBO(255, 255, 255, 0.3):Color.fromRGBO(0, 0, 0, 0.3);
     return Scaffold(
       appBar: _appbar,
       body: IndexedStack(
@@ -57,8 +58,14 @@ class _TabbarState extends State<RootTabPage> {
         children: children2,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+
         selectedItemColor: accent,
-        // fixedColor: Colors.black,
+        unselectedItemColor: Color.fromRGBO(255, 255, 255, 0.3),
+
+        //unselectedItemColor
+        // fixedColor: Colors.black,theme: AppTheme.lightTheme,
         type: BottomNavigationBarType.fixed,
         // onTap: onTabTapped,
         onTap: (index) {
@@ -70,18 +77,12 @@ class _TabbarState extends State<RootTabPage> {
                 _appbar = null;
                 break;
               case 1:
-                _page = "Shop";
+                _page = "Check Room";
                 _appbar = null;
                 break;
               case 2:
-                _page = "Account";
-                _appbar = AppBar(
-                  elevation: 0.8,
-                  title: Text(
-                    "ACCOUNT",
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                  ),
-                );
+                _page = "SNS";
+                _appbar = null;
                 break;
               case 3:
                 _page = "Cart";
@@ -94,14 +95,12 @@ class _TabbarState extends State<RootTabPage> {
                 );
                 break;
               case 4:
-                _page = "More";
+                _page = "Account";
                 _appbar = AppBar(
                   elevation: 0.8,
                   title: Text(
-                    "MORE",
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                    ),
+                    "ACCOUNT",
+                    style: TextStyle(color: Theme.of(context).primaryColor),
                   ),
                 );
                 break;
@@ -118,14 +117,14 @@ class _TabbarState extends State<RootTabPage> {
               label: ""),
           BottomNavigationBarItem(
               icon: Icon(
-                FontAwesomeIcons.mapMarkerAlt,
-                size: 22,
+                Icons.checkroom_outlined,
+                size: 28,
               ),
               label: ""),
           BottomNavigationBarItem(
               icon: Icon(
-                FontAwesomeIcons.userAlt,
-                size: 21,
+                Icons.share,
+                size: 22,
               ),
               label: ""),
           BottomNavigationBarItem(
@@ -135,16 +134,20 @@ class _TabbarState extends State<RootTabPage> {
               ),
               label: ""),
           BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: Icon(
-                  Icons.more_horiz,
-                  size: 40,
-                ),
+              icon: Icon(
+                FontAwesomeIcons.userAlt,
+                size: 21,
               ),
               label: "")
         ],
       ),
     );
+  }
+}
+extension DarkMode on BuildContext {
+  /// is dark mode currently enabled?
+  bool get isDarkMode {
+    final brightness = MediaQuery.of(this).platformBrightness;
+    return brightness == Brightness.dark;
   }
 }

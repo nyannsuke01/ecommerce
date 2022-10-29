@@ -17,7 +17,7 @@ class HexColor extends Color {
 const Color primary = Color(0xff000000);
 const Color medium = Color(0xff515151);
 const Color secondary = Color(0xffffffff);
-const Color accent = Color(0xFFEA9F5A);
+const Color accent = Color(0xFFE8C344);
 
 const Color success = Color(0xff44c93a);
 const Color danger = Color(0xffff4657);
