@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shop_ui/theme/colors.dart';
 import 'package:shop_ui/widgets/custom_appbar.dart';
 import 'package:shop_ui/widgets/custom_button.dart';
@@ -12,6 +13,8 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   bool _isRemember;
+  String _email = '';
+  String _password = '';
 
   @override
   void initState() {
@@ -44,15 +47,25 @@ class _SignInPageState extends State<SignInPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    CustomTextField(
-                      obscureText: false,
-                      title: 'Email or phone number',
+                    // 1行目 メールアドレス入力用テキストフィールド
+                    TextFormField(
+                      decoration: const InputDecoration(labelText: 'メールアドレス'),
+                      onChanged: (String value) {
+                        setState(() {
+                          _email = value;
+                        });
+                      },
                     ),
                     SizedBox(height: 20),
-                    CustomPasswordField(
-                      title: 'Password',
-                      suffixText: 'Forgot?',
-                      routeName: '/forgot_password',
+                    // 2行目 パスワード入力用テキストフィールド
+                    TextFormField(
+                      decoration: const InputDecoration(labelText: 'パスワード'),
+                      obscureText: true,
+                      onChanged: (String value) {
+                        setState(() {
+                          _password = value;
+                        });
+                      },
                     ),
                   ],
                 ),
@@ -85,8 +98,17 @@ class _SignInPageState extends State<SignInPage> {
                     width: MediaQuery.of(context).size.width - 80,
                     fontWeight: FontWeight.bold,
                   ),
-                  onTap: () {
-                    gotoHome();
+                  onTap: () async {
+                    try {
+                      // メール/パスワードでログイン
+                      final FirebaseUser user = (await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                          email: _email, password: _password));
+                      if (user != null)
+                        print("ログインしました　${user.email} , ${user.uid}");
+                    } catch (e) {
+                      print(e);
+                    }
                   },
                 ),
               ),
@@ -115,6 +137,10 @@ class _SignInPageState extends State<SignInPage> {
         ],
       ),
     );
+  }
+
+  signIn() {
+
   }
 
   gotoHome() {

@@ -14,6 +14,7 @@ import 'package:shop_ui/pages/Order/order_success.dart';
 import 'package:shop_ui/pages/Product/filter_page.dart';
 import 'package:shop_ui/pages/Product/product_detail_page.dart';
 import 'package:shop_ui/pages/Product/product_list_page.dart';
+import 'package:shop_ui/pages/SNS/sns_page.dart';
 import 'package:shop_ui/pages/Share/search_page.dart';
 import 'package:shop_ui/pages/Share/wishlist_page.dart';
 import 'package:shop_ui/pages/Shop/search_shop_page.dart';
@@ -90,6 +91,10 @@ Route<dynamic> generateRoute(RouteSettings setting) {
 
     case '/account':
       return MaterialPageRoute(builder: (context) => AccountPage());
+
+    case '/sns':
+      return MaterialPageRoute(builder: (context) => SnsPage());
+
 
     default:
       return MaterialPageRoute(

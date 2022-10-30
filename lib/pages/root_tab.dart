@@ -1,12 +1,12 @@
+import 'package:provider/provider.dart';
 import 'package:shop_ui/pages/Account/account_page.dart';
 import 'package:shop_ui/pages/Cart/cart_page.dart';
-import 'package:shop_ui/pages/More/more_page.dart';
 import 'package:shop_ui/pages/Shop/search_shop_page.dart';
 import 'package:shop_ui/pages/home_page.dart';
 import 'package:shop_ui/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../theme/app_theme.dart';
+import '../bloc/app_theme_notifer.dart';
 import 'SNS/sns_page.dart';
 
 class RootTabPage extends StatefulWidget {
@@ -38,19 +38,19 @@ class _TabbarState extends State<RootTabPage> {
   void initState() {
     super.initState();
 
-    // if (mounted) {
-    //   setState(() {
-    //     _pageIndex =
-    //         [0, '', null].contains(widget.activePage) ? 0 : widget.activePage;
-    //   });
-    // }
+    if (mounted) {
+      setState(() {
+        _pageIndex =
+            [0, '', null].contains(widget.activePage) ? 0 : widget.activePage;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     // var _l10n = PackedLocalizations.of(context);
-    var unSelectedIconColor  = context.isDarkMode ?
-    Color.fromRGBO(255, 255, 255, 0.3):Color.fromRGBO(0, 0, 0, 0.3);
+    // final AppStateNotifier appState = Provider.of<AppStateNotifier>(context);
+
     return Scaffold(
       appBar: _appbar,
       body: IndexedStack(
@@ -62,7 +62,7 @@ class _TabbarState extends State<RootTabPage> {
         showUnselectedLabels: false,
 
         selectedItemColor: accent,
-        unselectedItemColor: Color.fromRGBO(255, 255, 255, 0.3),
+        unselectedItemColor: Theme.of(context).buttonColor,
 
         //unselectedItemColor
         // fixedColor: Colors.black,theme: AppTheme.lightTheme,
@@ -124,7 +124,7 @@ class _TabbarState extends State<RootTabPage> {
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.share,
-                size: 22,
+                size: 28,
               ),
               label: ""),
           BottomNavigationBarItem(
@@ -136,7 +136,7 @@ class _TabbarState extends State<RootTabPage> {
           BottomNavigationBarItem(
               icon: Icon(
                 FontAwesomeIcons.userAlt,
-                size: 21,
+                size: 22,
               ),
               label: "")
         ],

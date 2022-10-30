@@ -35,12 +35,12 @@ class _RootAppState extends State<RootApp> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppStateNotifier>(
-      builder: (context, appState, child) {
+      builder: (context, appThemeState, child) {
         return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
-            themeMode: appState.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
+            themeMode: appThemeState.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
             home: this.widget.rootScreen,
             onGenerateRoute: router.generateRoute);
       },

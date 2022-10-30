@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shop_ui/theme/colors.dart';
 import 'package:shop_ui/widgets/custom_appbar.dart';
 import 'package:shop_ui/widgets/custom_button.dart';
 import 'package:shop_ui/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -12,6 +14,10 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   bool _isAgree;
+  // 入力したメールアドレス・パスワード
+  String _name = '';
+  String _email = '';
+  String _password = '';
 
   @override
   void initState() {
@@ -26,7 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
         preferredSize: Size.fromHeight(200.0),
         child: CustomAppBar(
           appBarTitle: 'BACK',
-          title: "Create your \naccount",
+          title: "アカウント \n作成",
         ),
       ),
       body: getBody(),
@@ -44,19 +50,32 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    CustomTextField(
-                      title: 'Name',
-                      obscureText: false,
+                    TextFormField(
+                      decoration: const InputDecoration(labelText: 'お名前'),
+                      onChanged: (String value) {
+                        setState(() {
+                          _email = value;
+                        });
+                      },
                     ),
                     SizedBox(height: 20),
-                    CustomTextField(
-                      title: 'Email',
-                      obscureText: false,
+                    TextFormField(
+                      decoration: const InputDecoration(labelText: 'メールアドレス'),
+                      onChanged: (String value) {
+                        setState(() {
+                          _email = value;
+                        });
+                      },
                     ),
                     SizedBox(height: 20),
-                    CustomTextField(
-                      title: 'Password',
+                    TextFormField(
+                      decoration: const InputDecoration(labelText: 'パスワード'),
                       obscureText: true,
+                      onChanged: (String value) {
+                        setState(() {
+                          _password = value;
+                        });
+                      },
                     ),
                   ],
                 ),
@@ -89,8 +108,16 @@ class _SignUpPageState extends State<SignUpPage> {
                     width: MediaQuery.of(context).size.width - 80,
                     fontWeight: FontWeight.bold,
                   ),
-                  onTap: () {
-                    goToPreference();
+                  onTap: () async {
+                    try {
+                      final FirebaseUser user = (await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                          email: _email, password: _password));
+                      if (user != null)
+                        print("ユーザ登録しました ${user.email} , ${user.uid}");
+                    } catch (e) {
+                      print(e);
+                    }
                   },
                 ),
               ),
@@ -135,6 +162,27 @@ class _SignUpPageState extends State<SignUpPage> {
         ],
       ),
     );
+  }
+  signUpEmail() {
+      // try {
+      //   // メール/パスワードでログイン
+      //   final FirebaseAuth auth = FirebaseAuth.instance;
+      //   final UserCredential result =
+      //   await auth.signInWithEmailAndPassword(
+      //     email: loginUserEmail,
+      //     password: loginUserPassword,
+      //   );
+      //   // ログインに成功した場合
+      //   final User user = result.user!;
+      //   setState(() {
+      //     infoText = "ログインOK：${user.email}";
+      //   });
+      // } catch (e) {
+      //   // ログインに失敗した場合
+      //   setState(() {
+      //     infoText = "ログインNG：${e.toString()}";
+      //   });
+      // },
   }
 
   goToPreference() {
